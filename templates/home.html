@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Adoption Agency</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">Available Pets</h1>
+      <a href="{{ url_for('add_pet') }}" class="btn btn-primary mb-3"
+        >Add a New Pet</a
+      >
+      <div class="row">
+        {% for pet in pets %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if pet.photo_url %}
+            <img
+              src="{{ pet.photo_url }}"
+              class="card-img-top"
+              alt="Photo of {{ pet.name }}"
+            />
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ pet.name }}</h5>
+              {% if pet.available %}
+              <p class="card-text text-success font-weight-bold">Available</p>
+              {% endif %}
+              <a
+                href="{{ url_for('edit_pet', pet_id=pet.id) }}"
+                class="btn btn-info"
+                >Edit</a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
